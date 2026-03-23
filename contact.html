@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Me</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- EmailJS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+ <script>
+   (function () {
+      emailjs.init({
+        publicKey: "eFlkmna47FbuPAspM",
+        });
+      })();
+ </script>
+</head>
+<body>
+
+<header>
+<h2><span class="midnightblue">My</span><span class="skyblue">Portfolio</span></h2>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="about.html">About Me</a>
+    <a href="skills.html">Skills</a>
+    <a href="contact.html" class="active">Contact Me</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1 id="typing" ><span class="midnightblue">Con</span><span class="skyblue">tact Me</span></h1>
+
+  <form id="contact-form" onsubmit="sendEmail(event)">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <input type="text" name="subject" placeholder="Subject" required>
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <button  type="submit" class="midnightblue-btn">Send Message</button>
+    <p id="form-status"></p>
+  </form>
+</div>
+
+<footer>
+  <p>
+    <a href="https://www.linkedin.com/in/emmanuel-charles-marcello-lado-21a73b2b6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">LinkedIn</a> |
+    <a href="https://wa.me/918679335697" target="">WhatsApp</a> |
+    <a href="https://www.facebook.com/share/1KAaMfUiuu/">Facebook</a> |
+    <a href="https://www.instagram.com/morjanjidu_mj?igsh=bnZwNW5tNWVmcjhm">Instagram</a> |
+    <a href="mailto:emmanuelcharlesmarcellolado@gmail.com">Email</a> |
+    <a href="tel:+918679335697">Call Me</a>
+  </p>
+</footer>
+
+<!-- ================= EMAIL SEND SCRIPT ================= -->
+<script>
+function sendEmail(event) {
+    event.preventDefault();
+
+    const status = document.getElementById("form-status");
+    status.style.color = "#000";
+    status.innerText = "Sending message...";
+
+    emailjs.send(
+        "service_1fkqc0n",
+        "template_hd2vzku",
+        {
+            name: document.querySelector("[name='name']").value,
+            email: document.querySelector("[name='email']").value,
+            subject: document.querySelector("[name='subject']").value,
+            message: document.querySelector("[name='message']").value
+        },
+        "eFlkmna47FbuPAspM"
+    )
+    .then(function () {
+        status.style.color = "green";
+        status.innerText = "✅ Message sent successfully!";
+        document.getElementById("contact-form").reset();
+    })
+    .catch(function (error) {
+        status.style.color = "red";
+        status.innerText = "❌ Failed to send message. Please try again.";
+        console.error("EmailJS Error:", error);
+    });
+}
+</script>
+
+</body>
+</html>
